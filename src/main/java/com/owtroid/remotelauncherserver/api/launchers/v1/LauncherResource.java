@@ -2,6 +2,7 @@ package com.owtroid.remotelauncherserver.api.launchers.v1;
 
 import com.codahale.metrics.annotation.Timed;
 import com.google.common.base.Optional;
+import com.owtroid.remotelauncherserver.auth.v1.User;
 import io.dropwizard.auth.Auth;
 
 import javax.ws.rs.GET;
@@ -20,7 +21,7 @@ public class LauncherResource {
 
     @GET
     @Timed
-    public Launcher getLauncher(@Auth @QueryParam("name") Optional<String> name) {
+    public Launcher getLauncher(@Auth User user, @QueryParam("name") Optional<String> name) {
         final Launcher launcher = new Launcher(name.or("NoName"), "The description");
         return launcher;
     }
