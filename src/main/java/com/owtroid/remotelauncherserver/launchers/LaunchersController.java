@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.TimeoutException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -14,9 +16,11 @@ import org.zeroturnaround.exec.ProcessExecutor;
 
 @RestController
 public class LaunchersController {
+    private final Logger log = LoggerFactory.getLogger(this.getClass());
     
     @RequestMapping(value="/launchers", method=RequestMethod.GET)
     public List<Launcher> getLaunchers(@RequestParam(value="id", defaultValue="") String id) throws IOException, InterruptedException, TimeoutException {
+        log.debug("getLaunchers " + id);
         List<Launcher> launchers = new ArrayList<>();
         List<String> args = Arrays.asList("");
         Launcher launcher = new Launcher("kate", args, "getLaunchers " + id);
