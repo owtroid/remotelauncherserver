@@ -1,5 +1,6 @@
 package com.owtroid.remotelauncherserver;
 
+import com.owtroid.remotelauncherserver.launchers.LaunchersController;
 import static org.hamcrest.Matchers.equalTo;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -19,18 +20,18 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = MockServletContext.class)
 @WebAppConfiguration
-public class GreetingControllerTest {
+public class LaunchersControllerTest {
 
 	private MockMvc mvc;
 
 	@Before
 	public void setUp() throws Exception {
-		mvc = MockMvcBuilders.standaloneSetup(new GreetingController()).build();
+		mvc = MockMvcBuilders.standaloneSetup(new LaunchersController()).build();
 	}
 
 	@Test
 	public void getGreeting() throws Exception {
-		mvc.perform(MockMvcRequestBuilders.get("/greeting").accept(MediaType.APPLICATION_JSON))
+		mvc.perform(MockMvcRequestBuilders.get("/launchers").accept(MediaType.APPLICATION_JSON))
 				.andExpect(status().isOk());
 	}
 }
